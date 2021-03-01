@@ -1,5 +1,5 @@
 {
-  "name": "your-vendor/thelia-sentry-module",
+  "name": "thelia/thelia-sentry-module",
   "description": "TheliaSentry module for Thelia",
   "license": "MIT",
   "type": "thelia-module",
