@@ -9,12 +9,24 @@ class AdminHome extends BaseHook
 {
     public function onMainBeforeContent(HookRenderEvent $event)
     {
-        if (isset($_SERVER['SENTRY_DSN']) && filter_var($_SERVER['SENTRY_DSN'], FILTER_VALIDATE_URL)) {
-            return;
+        if (!class_exists('\Sentry\ClientBuilder')) {
+            $event->add(
+                <<<HTML
+<div class="alert alert-danger">
+    The SDK Sentry for module TheliaSentry is not installed.
+    <br/>
+    <br/>
+    Please install the module TheliaSentry with composer or require Sentry SDK.
+    <br/>
+    composer require sentry/sdk:"^2.0"
+</div>
+HTML
+            );
         }
 
-        $event->add(
-<<<HTML
+        if (!isset($_SERVER['SENTRY_DSN']) || !filter_var($_SERVER['SENTRY_DSN'], FILTER_VALIDATE_URL)) {
+            $event->add(
+                <<<HTML
 <div class="alert alert-danger">
     The module TheliaSentry is not configured.
     <br/>
@@ -33,6 +45,7 @@ class AdminHome extends BaseHook
     Please deactivate the module TheliaSentry
 </div>
 HTML
-        );
+            );
+        }
     }
 }

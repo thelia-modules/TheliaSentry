@@ -4,18 +4,18 @@
         xsi:schemaLocation="http://thelia.net/schema/dic/module http://thelia.net/schema/dic/module/module-2_2.xsd">
     <fullnamespace>TheliaSentry\TheliaSentry</fullnamespace>
     <descriptive locale="en_US">
-        <title>Sentry module for thelia 2.4</title>
+        <title>Sentry module for thelia > 2.3</title>
     </descriptive>
     <descriptive locale="fr_FR">
-        <title>Sentry module pour thelia 2.4</title>
+        <title>Sentry module pour thelia > 2.3</title>
     </descriptive>
     <languages>
         <language>en_US</language>
         <language>fr_FR</language>
     </languages>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
     <type>classic</type>
-    <thelia>2.4.0</thelia>
+    <thelia>2.3.0</thelia>
     <stability>alpha</stability>
     <mandatory>0</mandatory>
     <hidden>0</hidden>

@@ -9,7 +9,10 @@ class ErrorListener
 {
     public function handleExceptionEvent(GetResponseForExceptionEvent $event)
     {
-        if (isset($_SERVER['SENTRY_DSN']) && filter_var($_SERVER['SENTRY_DSN'], FILTER_VALIDATE_URL)) {
+        if (class_exists('\Sentry\ClientBuilder')
+            && isset($_SERVER['SENTRY_DSN'])
+            && filter_var($_SERVER['SENTRY_DSN'], FILTER_VALIDATE_URL)
+        ) {
             $client = ClientBuilder::create([
                 'dsn' => $_SERVER['SENTRY_DSN']
             ])->getClient();
