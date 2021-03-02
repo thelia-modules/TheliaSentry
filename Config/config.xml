@@ -3,7 +3,16 @@
 <config xmlns="http://thelia.net/schema/dic/config"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://thelia.net/schema/dic/config http://thelia.net/schema/dic/config/thelia-1.0.xsd">
+    
+    <commands>
+        <command class="TheliaSentry\Command\TestCommand"/>
+    </commands>
+
     <services>
+        <service id="TheliaSentry\EventListener\ConsoleCommandListener" class="TheliaSentry\EventListener\ConsoleCommandListener">
+            <tag name="kernel.event_listener" event="console.exception" method="handleConsoleErrorEvent" priority="-64" />
+        </service>
+
         <service id="TheliaSentry\EventListener\ErrorListener" class="TheliaSentry\EventListener\ErrorListener">
             <tag name="kernel.event_listener" event="kernel.exception" method="handleExceptionEvent" priority="128" />
         </service>
