@@ -16,6 +16,10 @@
         <service id="TheliaSentry\EventListener\ErrorListener" class="TheliaSentry\EventListener\ErrorListener">
             <tag name="kernel.event_listener" event="kernel.exception" method="handleExceptionEvent" priority="128" />
         </service>
+
+        <service id="TheliaSentry\EventListener\RequestListener" class="TheliaSentry\EventListener\RequestListener">
+            <tag name="kernel.event_listener" event="kernel.request" method="handleKernelRequestEvent" priority="128" />
+        </service>
     </services>
 
     <hooks>

@@ -1,10 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace TheliaSentry\EventListener;
 
 use Sentry\ClientBuilder;;
+
+use Sentry\State\Scope;
 use Symfony\Component\Console\Event\ConsoleExceptionEvent;
 
 final class ConsoleCommandListener
@@ -19,7 +19,14 @@ final class ConsoleCommandListener
                 'dsn' => $_SERVER['SENTRY_DSN']
             ])->getClient();
 
-            $client->captureException($event->getException());
+            $scope = new Scope();
+
+            $scope->setTags([
+                'command' => $event->getCommand()->getName(),
+                'status_code' => $event->getExitCode(),
+            ]);
+
+            $client->captureException($event->getException(), $scope);
         }
     }
 }
