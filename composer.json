@@ -5,7 +5,8 @@
   "type": "thelia-module",
   "require": {
     "thelia/installer": "~1.1",
-    "sentry/sdk": "^2.0"
+    "sentry/sdk": "^2.0",
+    "symfony/dotenv": "*"
   },
   "extra": {
     "installer-name": "TheliaSentry"

@@ -4,9 +4,18 @@ namespace TheliaSentry\EventListener;
 
 use Sentry\ClientBuilder;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+use TheliaSentry\TheliaSentry;
 
 class ErrorListener
 {
+    /** @var string */
+    private $env;
+
+    public function __construct(string $env)
+    {
+        $this->env = $env;
+    }
+
     public function handleExceptionEvent(GetResponseForExceptionEvent $event)
     {
         $ignoreExceptions = [
@@ -23,13 +32,8 @@ class ErrorListener
             }
         }
 
-        if (class_exists('\Sentry\ClientBuilder')
-            && isset($_SERVER['SENTRY_DSN'])
-            && filter_var($_SERVER['SENTRY_DSN'], FILTER_VALIDATE_URL)
-        ) {
-            $client = ClientBuilder::create([
-                'dsn' => $_SERVER['SENTRY_DSN']
-            ])->getClient();
+        if (null !== $client = TheliaSentry::getClient()) {
+            RequestListener::$scope->setTag('environment', $this->env);
 
             $client->captureException($event->getException(), RequestListener::$scope);
         }

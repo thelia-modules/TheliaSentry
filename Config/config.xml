@@ -11,14 +11,17 @@
     <services>
         <service id="TheliaSentry\EventListener\ConsoleCommandListener" class="TheliaSentry\EventListener\ConsoleCommandListener">
             <tag name="kernel.event_listener" event="console.exception" method="handleConsoleErrorEvent" priority="-64" />
+            <argument>%kernel.environment%</argument>
         </service>
 
         <service id="TheliaSentry\EventListener\ErrorListener" class="TheliaSentry\EventListener\ErrorListener">
             <tag name="kernel.event_listener" event="kernel.exception" method="handleExceptionEvent" priority="128" />
+            <argument>%kernel.environment%</argument>
         </service>
 
         <service id="TheliaSentry\EventListener\RequestListener" class="TheliaSentry\EventListener\RequestListener">
             <tag name="kernel.event_listener" event="kernel.request" method="handleKernelRequestEvent" priority="128" />
+            <argument>%kernel.cache_dir%</argument>
         </service>
     </services>
 
