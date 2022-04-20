@@ -19,6 +19,7 @@ class ErrorListener
     public function handleExceptionEvent(GetResponseForExceptionEvent $event)
     {
         $ignoreExceptions = [
+            \Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class,
             \Thelia\Core\HttpKernel\Exception\RedirectException::class,
             \Symfony\Component\HttpKernel\Exception\HttpException::class,
             \Thelia\Core\Security\Exception\AuthenticationException::class,
