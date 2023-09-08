@@ -1,5 +1,7 @@
 # Thelia Sentry
 
+In Thelia > 2.5.0 this module is no longer needed, you can use the official symfony sentry bundle.
+
 # WIP
 
 This module is under development, please do not try to use it.
